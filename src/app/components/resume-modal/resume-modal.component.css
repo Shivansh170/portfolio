@@ -1,0 +1,11 @@
+/* Resume Modal Styles */
+:host {
+  display: block;
+}
+
+@media print {
+  /* Ensure fallback direct window.print() does not overlap or clip */
+  :host {
+    display: none !important;
+  }
+}

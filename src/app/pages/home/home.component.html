@@ -1,0 +1,244 @@
+<div class="space-y-16 py-6 sm:py-10 max-w-5xl mx-auto px-4 sm:px-6">
+  
+  <!-- ================= HERO: HIGHLIGHTED TEXT & AMBIENT 3D CORE BACKGROUND ================= -->
+  <section class="relative min-h-[500px] sm:min-h-[540px] p-6 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-white via-orange-50/20 to-white border-2 border-orange-200/80 shadow-xl shadow-orange-500/5 overflow-hidden flex flex-col justify-center">
+    
+    <!-- Three.js 3D Core Canvas in the Background -->
+    <app-three-scene></app-three-scene>
+
+    <!-- Subtle Ambient Radial Glow on the right side behind the 3D Core -->
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_80%_50%,rgba(255,237,213,0.35)_0%,transparent_65%)]" aria-hidden="true"></div>
+
+    <!-- Highlighted Foreground Content (z-10) -->
+    <div class="relative z-10 max-w-2xl lg:max-w-3xl space-y-6">
+      
+      <!-- Highlighted Status Pill -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 border border-orange-300 text-orange-950 text-xs sm:text-sm font-mono shadow-xs backdrop-blur-xs">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+        <span class="font-semibold">Veersa Technologies &bull; Full Stack Intern</span>
+      </div>
+
+      <!-- Highlighted Heading & Tech Stack -->
+      <div class="space-y-3">
+        <h1 class="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-none">
+          Shivansh Lavaniya
+        </h1>
+        <p class="text-xl sm:text-2xl text-slate-800 font-normal leading-snug">
+          Building enterprise applications with
+          <span class="text-orange-700 font-bold bg-orange-100/90 px-2.5 py-0.5 rounded-lg border border-orange-200 shadow-2xs">Angular 22</span>
+          and
+          <span class="text-orange-700 font-bold bg-orange-100/90 px-2.5 py-0.5 rounded-lg border border-orange-200 shadow-2xs">FastAPI</span>.
+        </p>
+      </div>
+
+      <!-- Bio Text -->
+      <p class="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 sm:bg-transparent backdrop-blur-2xs sm:backdrop-blur-none rounded-xl p-2 sm:p-0">
+        {{ portfolioService.personalInfo.bio }}
+      </p>
+
+      <!-- Highlighted Fast Facts Strip -->
+      <div class="flex flex-wrap gap-2.5 pt-1">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-50 border border-orange-200/90 text-xs sm:text-sm font-mono font-medium text-orange-900">
+          <svg class="w-3.5 h-3.5 text-orange-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 11H9v-2h2v2zm0-4H9V5h2v4z"/></svg>
+          Veersa Technologies Intern
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-50 border border-orange-200/90 text-xs sm:text-sm font-mono font-medium text-orange-900">
+          <svg class="w-3.5 h-3.5 text-orange-600 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a10.97 10.97 0 01-1.07 4.148c-.287.72-.057 1.545.568 2.003 1.258.922 2.87 1.488 4.627 1.706A1 1 0 0010 16a1 1 0 00.625-.092c1.757-.218 3.369-.784 4.627-1.706.625-.458.855-1.284.568-2.003a10.97 10.97 0 01-1.07-4.148l2.644-1.13a1 1 0 000-1.84l-7-3z"/></svg>
+          B.Tech AI &amp; ML &bull; 8.4 CGPA
+        </span>
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-orange-50 border border-orange-200/90 text-xs sm:text-sm font-mono font-medium text-orange-900">
+          <svg class="w-3.5 h-3.5 text-orange-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+          Production-Ready Architecture
+        </span>
+      </div>
+
+      <!-- Quick Contact Strip -->
+      <div class="flex flex-wrap items-center gap-4 text-sm sm:text-base text-slate-700 font-mono pt-1">
+        <button
+          (click)="copyEmail()"
+          class="hover:underline flex items-center gap-2 transition-colors cursor-pointer"
+          [ngClass]="copiedEmail() ? 'text-emerald-700 font-semibold' : 'text-orange-600 hover:text-orange-700 font-medium'"
+        >
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          <span>{{ copiedEmail() ? '✓ Copied to clipboard' : portfolioService.personalInfo.email }}</span>
+        </button>
+        <span class="text-slate-300 hidden sm:inline">&bull;</span>
+        <a [href]="portfolioService.personalInfo.github" target="_blank" rel="noopener noreferrer" class="hover:text-orange-600 transition-colors flex items-center gap-1.5 font-medium">
+          <app-tech-icon name="github" class="w-4 h-4"></app-tech-icon>
+          <span>GitHub &rarr;</span>
+        </a>
+        <span class="text-slate-300 hidden sm:inline">&bull;</span>
+        <a [href]="portfolioService.personalInfo.linkedin" target="_blank" rel="noopener noreferrer" class="hover:text-orange-600 transition-colors flex items-center gap-1.5 font-medium">
+          <svg class="w-4 h-4 shrink-0 text-[#0A66C2]" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <span>LinkedIn &rarr;</span>
+        </a>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-wrap items-center gap-3.5 pt-2">
+        <a
+          routerLink="/projects"
+          class="px-5 py-3 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base shadow-sm shadow-orange-500/20 transition-all duration-200 cursor-pointer active:scale-95"
+        >
+          Explore Projects
+        </a>
+        <button
+          (click)="portfolioService.openResumeModal()"
+          class="px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm sm:text-base transition-colors cursor-pointer active:scale-95 shadow-2xs"
+        >
+          Resume Preview
+        </button>
+        <a
+          routerLink="/contact"
+          class="px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm sm:text-base transition-colors cursor-pointer active:scale-95 shadow-2xs"
+        >
+          Contact Me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= WORK EXPERIENCE ================= -->
+  <section class="space-y-6">
+    <div class="flex items-baseline justify-between border-b border-slate-200/80 pb-4">
+      <div>
+        <span class="text-xs sm:text-sm font-mono uppercase tracking-wider text-orange-600 block mb-1 font-semibold">Career</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Experience</h2>
+      </div>
+      <a routerLink="/experience" class="text-sm font-semibold text-orange-600 hover:underline">
+        Detailed view &rarr;
+      </a>
+    </div>
+
+    <div class="space-y-4">
+      @for (exp of portfolioService.experiences; track exp.id) {
+        <div class="subtle-card p-6 sm:p-8 space-y-4 hover:shadow-lg transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5">
+            <div>
+              <span class="text-lg sm:text-xl font-bold text-slate-900">{{ exp.role }}</span>
+              <span class="text-slate-500 font-medium"> &bull; {{ exp.company }}</span>
+            </div>
+            <span class="text-xs sm:text-sm font-mono text-slate-600 bg-slate-50 px-3 py-1 rounded-md border border-slate-200/70 self-start sm:self-auto font-medium">
+              {{ exp.period }}
+            </span>
+          </div>
+
+          <ul class="list-disc list-inside space-y-2 text-sm sm:text-base text-slate-600 pl-1 leading-relaxed">
+            @for (hl of exp.highlights; track hl) {
+              <li>{{ hl }}</li>
+            }
+          </ul>
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            @for (s of exp.skills; track s) {
+              <span class="subtle-tag text-xs sm:text-sm py-1.5 px-3">
+                <app-tech-icon [name]="s" class="w-4 h-4"></app-tech-icon>
+                <span>{{ s }}</span>
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ================= FEATURED PROJECTS ================= -->
+  <section class="space-y-6">
+    <div class="flex items-baseline justify-between border-b border-slate-200/80 pb-4">
+      <div>
+        <span class="text-xs sm:text-sm font-mono uppercase tracking-wider text-orange-600 block mb-1 font-semibold">Work</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Featured Projects</h2>
+      </div>
+      <a routerLink="/projects" class="text-sm font-semibold text-orange-600 hover:underline">
+        All projects &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      @for (proj of portfolioService.projects; track proj.id) {
+        <div class="subtle-card p-6 sm:p-7 flex flex-col justify-between space-y-5 hover:shadow-lg transition-all duration-300">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs sm:text-sm font-mono px-2.5 py-0.5 rounded-md bg-orange-50 text-orange-700 border border-orange-200 font-semibold">
+                {{ proj.category }}
+              </span>
+              <a [href]="proj.githubUrl" target="_blank" rel="noopener noreferrer" class="text-xs sm:text-sm text-slate-500 hover:text-orange-600 transition-colors font-mono">
+                Source Code &rarr;
+              </a>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-bold text-slate-900">{{ proj.title }}</h3>
+            <p class="text-sm text-slate-500 font-normal">{{ proj.tagline }}</p>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed">{{ proj.description }}</p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-slate-100">
+            @for (tech of proj.technologies; track tech) {
+              <span class="subtle-tag text-xs sm:text-sm py-1.5 px-3">
+                <app-tech-icon [name]="tech" class="w-4 h-4"></app-tech-icon>
+                <span>{{ tech }}</span>
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ================= TECHNICAL SKILLS ================= -->
+  <section class="space-y-6">
+    <div class="flex items-baseline justify-between border-b border-slate-200/80 pb-4">
+      <div>
+        <span class="text-xs sm:text-sm font-mono uppercase tracking-wider text-orange-600 block mb-1 font-semibold">Stack</span>
+        <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Skills</h2>
+      </div>
+      <a routerLink="/skills" class="text-sm font-semibold text-orange-600 hover:underline">
+        Detailed breakdown &rarr;
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      @for (cat of portfolioService.skillCategories; track cat.category) {
+        <div class="subtle-card p-6 space-y-3.5 hover:shadow-lg transition-all duration-300">
+          <h4 class="text-sm sm:text-base font-mono font-bold uppercase tracking-wider text-slate-800">
+            {{ cat.category }}
+          </h4>
+          <div class="flex flex-wrap gap-2.5">
+            @for (skill of cat.skills; track skill) {
+              <span class="subtle-tag text-sm sm:text-base py-1.5 px-3">
+                <app-tech-icon [name]="skill" class="w-4 h-4 sm:w-5 sm:h-5"></app-tech-icon>
+                <span>{{ skill }}</span>
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ================= EDUCATION & RECOGNITION ================= -->
+  <section class="space-y-6">
+    <div class="border-b border-slate-200/80 pb-4">
+      <span class="text-xs sm:text-sm font-mono uppercase tracking-wider text-orange-600 block mb-1 font-semibold">Academic</span>
+      <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">Education & Achievements</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div class="subtle-card p-6 sm:p-7 space-y-2.5 hover:shadow-lg transition-all duration-300">
+        <span class="text-xs sm:text-sm font-mono text-orange-600 font-semibold">Degree</span>
+        <h4 class="font-bold text-slate-900 text-lg sm:text-xl">ABES Engineering College</h4>
+        <p class="text-sm sm:text-base text-slate-600">B.Tech in Computer Science &bull; CGPA: 8.4</p>
+        <p class="text-xs sm:text-sm text-slate-500 font-mono">2023 – Present &bull; Ghaziabad, India</p>
+      </div>
+
+      <div class="subtle-card p-6 sm:p-7 space-y-2.5 hover:shadow-lg transition-all duration-300">
+        <span class="text-xs sm:text-sm font-mono text-orange-600 font-semibold">Hackathons</span>
+        <div class="space-y-2 text-sm sm:text-base text-slate-700">
+          <div><strong class="text-slate-900">SIH 2025:</strong> Internal Round &mdash; Top 50 among 315 teams</div>
+          <div><strong class="text-slate-900">Capgemini Hackathon:</strong> Pan-India &mdash; Top 10 Finalist</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>

@@ -1,0 +1,159 @@
+@if (portfolioService.isResumeModalOpen()) {
+  <div class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true">
+    <div
+      class="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]"
+      (click)="$event.stopPropagation()"
+    >
+      <!-- Modal Top Bar: Pure White + Orange theme (No dark/blue tones) -->
+      <div class="flex items-center justify-between px-6 py-4 bg-white text-slate-900 border-b border-slate-200">
+        <div class="flex items-center gap-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-orange-600"></span>
+          <span class="text-xs font-mono font-semibold text-slate-800 uppercase tracking-wider">
+            Resume &bull; Shivansh Lavaniya
+          </span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            (click)="printResume()"
+            class="px-3.5 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-700 text-white text-xs font-medium transition-colors shadow-xs flex items-center gap-1.5"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+            </svg>
+            <span>Print / Save PDF</span>
+          </button>
+          <button
+            (click)="portfolioService.closeResumeModal()"
+            class="text-slate-400 hover:text-slate-800 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
+            aria-label="Close resume"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Printable Resume Body -->
+      <div class="overflow-y-auto p-6 sm:p-8 space-y-6 text-slate-800 text-sm leading-relaxed bg-white" id="resumeBody">
+        
+        <!-- Header -->
+        <div class="border-b border-slate-200 pb-4">
+          <h1 class="text-2xl font-bold text-slate-900">Shivansh Lavaniya</h1>
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5 text-xs text-slate-600 font-mono">
+            <span>+91-8267005726</span>
+            <span>&bull;</span>
+            <a href="mailto:shivanshlavaniya456@gmail.com" class="text-orange-600 hover:underline">shivanshlavaniya456&#64;gmail.com</a>
+            <span>&bull;</span>
+            <a [href]="portfolioService.personalInfo.linkedin" target="_blank" class="text-orange-600 hover:underline">linkedin.com/in/shivansh-lavaniya</a>
+            <span>&bull;</span>
+            <a [href]="portfolioService.personalInfo.github" target="_blank" class="text-orange-600 hover:underline">github.com/Shivansh170</a>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div>
+          <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1 mb-3">
+            Experience
+          </h2>
+          <div class="space-y-4">
+            @for (exp of portfolioService.experiences; track exp.id) {
+              <div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline justify-between text-xs sm:text-sm font-semibold">
+                  <div class="text-slate-900 font-bold">
+                    {{ exp.role }} &mdash; <span class="text-orange-600 font-medium">{{ exp.company }}</span>
+                  </div>
+                  <div class="text-xs text-slate-500 font-mono">{{ exp.period }}</div>
+                </div>
+                <ul class="list-disc list-inside mt-1.5 space-y-1 text-slate-600 text-xs sm:text-sm pl-1">
+                  @for (hl of exp.highlights; track hl) {
+                    <li>{{ hl }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div>
+          <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1 mb-3">
+            Education
+          </h2>
+          <div class="space-y-3">
+            @for (edu of portfolioService.education; track edu.id) {
+              <div class="flex flex-col sm:flex-row sm:items-baseline justify-between text-xs sm:text-sm">
+                <div>
+                  <span class="font-bold text-slate-900">{{ edu.institution }}</span>, {{ edu.location }}
+                  <div class="text-slate-600 text-xs mt-0.5">{{ edu.degree }} &bull; <strong class="text-slate-800">{{ edu.score }}</strong></div>
+                </div>
+                <div class="text-xs text-slate-500 font-mono">{{ edu.period }}</div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div>
+          <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1 mb-3">
+            Projects
+          </h2>
+          <div class="space-y-3">
+            @for (proj of portfolioService.projects; track proj.id) {
+              <div>
+                <div class="font-bold text-slate-900 text-xs sm:text-sm">
+                  {{ proj.title }} &mdash; <span class="font-normal text-slate-600">{{ proj.tagline }}</span>
+                  <span class="text-xs font-mono text-orange-600"> | {{ proj.technologies.join(', ') }}</span>
+                </div>
+                <ul class="list-disc list-inside mt-1 space-y-1 text-slate-600 text-xs sm:text-sm pl-1">
+                  @for (bullet of proj.bullets; track bullet) {
+                    <li>{{ bullet }}</li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Technical Skills -->
+        <div>
+          <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1 mb-2">
+            Technical Skills
+          </h2>
+          <div class="space-y-1.5 text-xs sm:text-sm text-slate-700">
+            <div><strong class="text-slate-900">Languages:</strong> Python, Java, SQL, JavaScript (ES6+), TypeScript, HTML5, CSS3</div>
+            <div><strong class="text-slate-900">Frameworks:</strong> Angular 22, React, FastAPI, Express.js, Tailwind CSS</div>
+            <div><strong class="text-slate-900">Developer Tools:</strong> Git, GitHub, VS Code, Postman, ThunderClient, Vercel, Render</div>
+            <div><strong class="text-slate-900">Databases & Architecture:</strong> MySQL, MongoDB, REST APIs, Agile / Scrum</div>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div>
+          <h2 class="text-xs font-mono font-bold uppercase tracking-wider text-slate-900 border-b border-slate-200 pb-1 mb-2">
+            Achievements
+          </h2>
+          <div class="space-y-1.5 text-xs sm:text-sm text-slate-700">
+            @for (ach of portfolioService.achievements; track ach.id) {
+              <div>
+                <strong class="text-slate-900">{{ ach.title }}:</strong> {{ ach.description }}
+              </div>
+            }
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Bar: Pure White + Orange theme -->
+      <div class="px-6 py-3.5 bg-white border-t border-slate-200 flex items-center justify-between text-xs">
+        <span class="text-slate-500 font-mono">+91-8267005726</span>
+        <button
+          (click)="portfolioService.copyToClipboard('shivanshlavaniya456@gmail.com', 'Email')"
+          class="px-3 py-1.5 rounded-lg border border-slate-300 bg-white hover:bg-orange-50 hover:text-orange-700 text-slate-700 font-medium transition-colors"
+        >
+          Copy Email
+        </button>
+      </div>
+    </div>
+  </div>
+}

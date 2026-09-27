@@ -1,0 +1,107 @@
+<div class="py-10 sm:py-16 max-w-5xl mx-auto px-4 sm:px-6 space-y-12">
+  
+  <!-- Header -->
+  <div class="space-y-3 border-b border-slate-200/80 pb-6">
+    <div class="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-orange-600">
+      Timeline
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+      Experience & Education
+    </h1>
+    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+      Practical engineering roles, computer science degree details, and hackathon accomplishments.
+    </p>
+  </div>
+
+  <!-- Work Experience -->
+  <section class="space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+      <span class="w-3 h-3 rounded-full bg-orange-600"></span>
+      Internships & Experience
+    </h2>
+
+    <div class="space-y-6">
+      @for (exp of portfolioService.experiences; track exp.id) {
+        <div class="subtle-card p-6 sm:p-8 space-y-4 hover:shadow-lg transition-all duration-300">
+          <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 border-b border-slate-100 pb-4">
+            <div>
+              <h3 class="text-lg sm:text-xl font-bold text-slate-900">{{ exp.role }}</h3>
+              <p class="text-sm sm:text-base font-medium text-orange-600 mt-0.5">{{ exp.company }}</p>
+            </div>
+            <span class="text-xs sm:text-sm font-mono text-slate-600 bg-slate-50 px-3 py-1 rounded-md border border-slate-200/70 self-start sm:self-auto font-medium">
+              {{ exp.period }}
+            </span>
+          </div>
+
+          <ul class="list-disc list-inside space-y-2.5 text-sm sm:text-base text-slate-600 pl-1 leading-relaxed">
+            @for (hl of exp.highlights; track hl) {
+              <li>{{ hl }}</li>
+            }
+          </ul>
+
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-slate-100">
+            @for (s of exp.skills; track s) {
+              <span class="subtle-tag text-xs sm:text-sm py-1 px-3">
+                <app-tech-icon [name]="s" class="w-4 h-4"></app-tech-icon>
+                <span>{{ s }}</span>
+              </span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section class="space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+      <span class="w-3 h-3 rounded-full bg-orange-600"></span>
+      Education
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      @for (edu of portfolioService.education; track edu.id) {
+        <div class="subtle-card p-6 sm:p-7 space-y-3.5 hover:shadow-lg transition-all duration-300">
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-mono text-slate-500 font-medium">{{ edu.period }}</span>
+            <span class="text-xs sm:text-sm font-mono text-slate-500 font-medium">{{ edu.location }}</span>
+          </div>
+
+          <div>
+            <h3 class="font-bold text-slate-900 text-lg sm:text-xl">{{ edu.institution }}</h3>
+            <p class="text-sm sm:text-base text-slate-600 mt-1">{{ edu.degree }}</p>
+            <p class="text-sm sm:text-base font-semibold text-orange-600 mt-1">{{ edu.score }}</p>
+          </div>
+
+          <ul class="text-sm sm:text-base text-slate-600 space-y-1.5 pt-3 border-t border-slate-100">
+            @for (d of edu.details; track d) {
+              <li>&bull; {{ d }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Hackathons -->
+  <section class="space-y-6">
+    <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2.5">
+      <span class="w-3 h-3 rounded-full bg-orange-600"></span>
+      Hackathons & Accolades
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      @for (ach of portfolioService.achievements; track ach.id) {
+        <div class="subtle-card p-6 sm:p-7 space-y-2.5 hover:shadow-lg transition-all duration-300">
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-mono text-orange-600 font-semibold">{{ ach.year }}</span>
+            <span class="text-xs sm:text-sm font-mono font-medium text-slate-700 bg-slate-50 px-2.5 py-0.5 rounded border border-slate-200">{{ ach.tag }}</span>
+          </div>
+          <h3 class="font-bold text-slate-900 text-lg">{{ ach.title }}</h3>
+          <p class="text-sm sm:text-base text-slate-600 leading-relaxed">{{ ach.description }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+</div>

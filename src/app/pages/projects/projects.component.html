@@ -1,0 +1,121 @@
+<div class="py-10 sm:py-16 max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+  
+  <!-- Header -->
+  <div class="space-y-3 border-b border-slate-200/80 pb-6">
+    <div class="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-orange-600">
+      Selected Work
+    </div>
+    <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+      Projects
+    </h1>
+    <p class="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed">
+      Full-stack web applications built with Angular 22, FastAPI, React, and MySQL/MongoDB databases.
+    </p>
+
+    <!-- Interactive Category Filter Tabs -->
+    <div class="flex flex-wrap items-center gap-2 pt-4">
+      @for (cat of categories; track cat) {
+        <button
+          (click)="setFilter(cat)"
+          class="px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 cursor-pointer"
+          [ngClass]="{
+            'bg-orange-600 text-white shadow-xs font-semibold scale-105': selectedFilter() === cat,
+            'bg-white text-slate-700 border border-slate-200/80 hover:bg-orange-50 hover:text-orange-700 hover:border-orange-200': selectedFilter() !== cat
+          }"
+        >
+          {{ cat }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- Projects List -->
+  <div class="space-y-8">
+    @for (project of filteredProjects(); track project.id) {
+      <div class="subtle-card p-6 sm:p-8 space-y-6 hover:shadow-lg transition-all duration-300">
+        <!-- Top Info -->
+        <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 border-b border-slate-100 pb-4">
+          <div>
+            <div class="flex items-center gap-3">
+              <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">{{ project.title }}</h2>
+              <span class="text-xs sm:text-sm font-mono px-3 py-1 rounded-md bg-orange-50 text-orange-700 border border-orange-200 font-semibold">
+                {{ project.category }}
+              </span>
+            </div>
+            <p class="text-sm sm:text-base font-normal text-slate-600 mt-1">
+              {{ project.tagline }}
+            </p>
+          </div>
+
+          <a
+            [href]="project.githubUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm font-medium text-orange-600 hover:text-orange-700 hover:underline flex items-center gap-1.5 self-start sm:self-auto font-mono group transition-colors"
+          >
+            <span>GitHub Repository</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </a>
+        </div>
+
+        <p class="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
+          {{ project.description }}
+        </p>
+
+        <!-- Bullets -->
+        <div class="space-y-2">
+          <h3 class="text-xs sm:text-sm font-mono font-semibold uppercase tracking-wider text-slate-800">
+            Key Contributions
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-sm sm:text-base text-slate-600 pl-1 leading-relaxed">
+            @for (bullet of project.bullets; track bullet) {
+              <li>{{ bullet }}</li>
+            }
+          </ul>
+        </div>
+
+        <!-- Interactive Architecture Toggle -->
+        <div class="pt-2">
+          <button
+            (click)="toggleExpand(project.id)"
+            class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-orange-600 hover:text-orange-700 transition-colors cursor-pointer group"
+          >
+            <span>{{ expandedProjectId() === project.id ? 'Hide Technical Highlights' : 'View Technical Highlights' }}</span>
+            <svg
+              class="w-4 h-4 transition-transform duration-200"
+              [ngClass]="{ 'rotate-180': expandedProjectId() === project.id }"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          @if (expandedProjectId() === project.id) {
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-3">
+              @for (item of project.highlights; track item.label) {
+                <div class="p-3.5 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:bg-orange-50/50 hover:border-orange-200 transition-colors">
+                  <span class="text-xs font-mono text-slate-500 uppercase tracking-wider block">{{ item.label }}</span>
+                  <span class="text-sm sm:text-base font-bold text-slate-900 mt-0.5 block">{{ item.value }}</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Technologies with Brand Logos -->
+        <div class="pt-3 flex flex-wrap gap-2 border-t border-slate-100">
+          @for (tech of project.technologies; track tech) {
+            <span class="subtle-tag text-xs sm:text-sm py-1.5 px-3">
+              <app-tech-icon [name]="tech" class="w-4 h-4"></app-tech-icon>
+              <span>{{ tech }}</span>
+            </span>
+          }
+        </div>
+
+      </div>
+    }
+  </div>
+
+</div>

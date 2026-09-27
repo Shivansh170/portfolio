@@ -1,3 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
-
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+@layer base {
+  :root {
+    --color-orange-600: #ea580c;
+    --color-orange-500: #f97316;
+    --color-orange-50: #fff7ed;
+  }
+
+  *, ::before, ::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #1e293b;
+    background-color: #fafaf9;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body, button, input, select, textarea {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Cards and elements render cleanly and solidly without artificial entrance animations */
+
+/* Subtle, refined card styling with interactive hover */
+.subtle-card {
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  border-radius: 1.125rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subtle-card:hover {
+  border-color: rgba(251, 146, 60, 0.6);
+  box-shadow: 0 16px 36px -8px rgba(234, 88, 12, 0.1), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+  transform: translateY(-4px);
+}
+
+/* Clean interactive tag pill with icons */
+.subtle-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.875rem; /* 14px */
+  font-weight: 500;
+  color: #334155;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.625rem;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.subtle-tag:hover {
+  background-color: #fff7ed;
+  color: #ea580c;
+  border-color: #fdba74;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px -2px rgba(234, 88, 12, 0.12);
+}
+
+/* Interactive button micro-clicks */
+button:active:not(:disabled), a.btn:active {
+  transform: scale(0.97);
+}
+
+/* Crisp button focus */
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid #ea580c;
+  outline-offset: 2px;
+}
