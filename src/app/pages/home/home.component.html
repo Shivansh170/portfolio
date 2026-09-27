@@ -1,16 +1,9 @@
 <div class="space-y-16 py-6 sm:py-10 max-w-5xl mx-auto px-4 sm:px-6">
   
-  <!-- ================= HERO: HIGHLIGHTED TEXT & AMBIENT 3D CORE BACKGROUND ================= -->
-  <section class="relative min-h-[500px] sm:min-h-[540px] p-6 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-white via-orange-50/20 to-white border-2 border-orange-200/80 shadow-xl shadow-orange-500/5 overflow-hidden flex flex-col justify-center">
+  <!-- ================= HERO ================= -->
+  <section class="p-6 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-white via-orange-50/20 to-white border-2 border-orange-200/80 shadow-xl shadow-orange-500/5">
     
-    <!-- Three.js 3D Core Canvas in the Background -->
-    <app-three-scene></app-three-scene>
-
-    <!-- Subtle Ambient Radial Glow on the right side behind the 3D Core -->
-    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_80%_50%,rgba(255,237,213,0.35)_0%,transparent_65%)]" aria-hidden="true"></div>
-
-    <!-- Highlighted Foreground Content (z-10) -->
-    <div class="relative z-10 max-w-2xl lg:max-w-3xl space-y-6">
+    <div class="max-w-3xl space-y-6">
       
       <!-- Highlighted Status Pill -->
       <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 border border-orange-300 text-orange-950 text-xs sm:text-sm font-mono shadow-xs backdrop-blur-xs">
@@ -32,7 +25,7 @@
       </div>
 
       <!-- Bio Text -->
-      <p class="text-base sm:text-lg text-slate-700 leading-relaxed font-normal bg-white/60 sm:bg-transparent backdrop-blur-2xs sm:backdrop-blur-none rounded-xl p-2 sm:p-0">
+      <p class="text-base sm:text-lg text-slate-700 leading-relaxed font-normal">
         {{ portfolioService.personalInfo.bio }}
       </p>
 
